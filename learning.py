@@ -253,17 +253,68 @@
 
 
 #汉诺塔
-def move(n, a, b, c):
-	if n == 1:
-		print(a + '->' + c)
-	else:
-		move(n - 1, a, c, b)
-		move(1, a, b, c)
-		move(n - 1, b, a, c)
+# def move(n, a, b, c):
+# 	if n == 1:
+# 		print(a + '->' + c)
+# 	else:
+# 		move(n - 1, a, c, b)
+# 		move(1, a, b, c)
+# 		move(n - 1, b, a, c)
 
-move(3, 'A', 'B', 'C')
+# move(3, 'A', 'B', 'C')
 
 
+	# 6 高级特性
+# 切片
+# L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+#L[0:3]表示，从索引0开始取，直到索引3为止，但不包括索引3。
+#索引0，1，2，正好是3个元素。
+#如果第一个索引是0，还可以省略
+
+# print(L[0:3])
+# print(L[:2])
+
+#既然Python支持L[-1]取倒数第一个元素，
+#那么它同样支持倒数切片
+# print(L[-2:])
+# print(L[-2:-1])
+
+# L = list(range(100)) #L = [0,1,2,...,99]
+#前十个
+# L[:10]
+# #前十个数，每两个取一个
+# print(L[:10:2])
+# #所有的数 每五个取一个
+# print(L[::5])
+# #字符串也可以看成 list 操作
+# print('ABCDEFG'[::2])
+
+#去除字符串首尾的空格 ，注意不要调用str的strip()方法
+# def trim(s):
+# 	while s[:1] == ' ':
+# 		s = s[1:]
+# 	while s[-1:]==' ':
+#	 	s = s[:-1]
+# 	return s
+# print(trim('   hello  world   3 '))
+	
+#迭代
+# d = {'a': 1, 'b': 2, 'c': 3}
+#dict迭代的是key。如果要迭代value，可以用for value in d.values()，
+#如果要同时迭代key和value，可以用for k, v in d.items()
+# for key in d:
+# 	print(key)
+
+#判断一个对象是否可迭代，通过 collections 模块的 Iterable 类型判断
+# from collections import Iterable
+# print(isinstance('abc', Iterable))
+# print(isinstance([1, 2, 3], Iterable))
+# print(isinstance(123, Iterable))
+
+
+#Python内置的enumerate函数可以把一个list变成索引-元素对
+for i, value in enumerate(['a', 'b', 'c']):
+	print(i, value)
 
 
 
