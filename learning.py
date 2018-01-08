@@ -1,4 +1,46 @@
-	# 函数
+	# 1.字符串和编码
+# name = input('enter your name:')
+# s1 = input('输入上一年成绩:')
+# s2 = input('输入今年成绩:')
+# s1 = float(s1)
+# s2 = float(s2)
+
+# t =  (s2 - s1) / s1
+
+# print('%s 成绩提高了 %.1f%%' %(name, t))
+
+
+	# 2.条件判断  循环
+# classmates = ['aa', 'bb', 'cc']
+# print(len(classmates))
+
+# if len(classmates) > 3:
+# 	print('>3') 
+# elif len(classmates) == 3:
+# 	print('=3')
+# else:
+# 	print('<3')
+
+
+# print(list(range(5))) #[0,1,2,3,4]
+
+# sum = 0
+# for x in range(101):
+# 	sum = sum + x
+
+# print(sum)
+
+
+	# 4.dict , set
+# d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
+
+# # print(d['tom'])
+# # print('tome' in d)
+# print(d.get('tom'))
+# print(d.get('tom', -1))
+# print(d.pop('Bob'))
+
+	# 5.函数
 # def nop(): #空函数用pass占位
 # 	pass
 
