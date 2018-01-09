@@ -313,8 +313,8 @@
 
 
 #Python内置的enumerate函数可以把一个list变成索引-元素对
-for i, value in enumerate(['a', 'b', 'c']):
-	print(i, value)
+# for i, value in enumerate(['a', 'b', 'c']):
+# 	print(i, value)
 
 
 
