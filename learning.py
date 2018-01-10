@@ -472,6 +472,125 @@
 
 
 #        7 函数式编程
+#高阶函数
+#map() : 接收两个参数，一个是函数，一个是Iterable，
+#   map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
+# def f(x):
+# 	return x * x
+
+# r = map(f, [1,2,3,4,5])
+# print(r)
+# print(list(r))
+# list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))  # Int数组转字符串数组
+
+
+#reduce() : 把一个函数作用在一个序列[x1, x2, x3, ...]上，
+#   这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算，其效果就是：
+#   reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+#eg : 
+from functools import reduce
+# def add(x, y):
+# 	return x + y
+# reduce(add, [1, 3, 5, 9])  # 25
+
+# def fn(x, y):
+# 	return x * 10 + y
+# reduce(fn, [1, 3, 5, 7])   # 1357
+
+#整理成一个函数:
+# DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+# def str2int(s):
+#     def fn(x, y):
+#         return x * 10 + y
+#     def char2num(s):
+#         return DIGITS[s]
+#     return reduce(fn, map(char2num, s))
+
+# 转成首字母大写，其余小写
+# def normalize(name):
+#     return name.capitalize()  #转换
+
+# L1 = ['adam', 'LISA', 'barT']
+# L2 = list(map(normalize, L1))
+# print(L2)
+
+#sum()函数可以接受一个list并求和,写一个接受一个list并利用reduce()求积
+# def prod(L):
+# 	def chengji(x, y):
+# 		return x * y
+# 	return reduce(chengji, L)
+
+# 利用map和reduce编写一个str2float函数，把字符串'123.456'转换成浮点数123.456
+# DIGITS = {'.': '.', '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+# def str2float(s):
+# 	def fn(x, y):
+# 		return x * 10 + y
+# 	l = list(map(lambda c: DIGITS[c], s))
+# 	if '.' in l:
+# 		n = len(l) - l.index('.') - 1
+# 		l.remove('.')
+# 		return reduce(fn, l) / (10 ** n)  # **就是成方 10 的 n 次方
+# 	else:
+# 		return reduce(fn, l)
+# print('str2float(\'123.456\') =', str2float('123.456'))
+
+
+# filter()  过滤序列:filter()也接收一个函数和一个序列。filter()把传入的函数
+#         依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素
+# 删掉偶数，只保留奇数
+# def is_odd(n):
+#     return n % 2 == 1
+# list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+
+# def not_empty(s):
+#     return s and s.strip()  
+# list(filter(not_empty, ['A', '', 'B', None, 'C', '  ']))
+# 结果: ['A', 'B', 'C']
+
+# 用 埃拉托色尼筛选法  计算无限素数
+
+# 1，先构造一个从3开始的奇数序列
+# def _odd_iter():
+# 	n = 1
+# 	while True:
+# 		n = n + 2
+# 		yield n
+# # 2,定义筛选函数
+# def _not_divisible(n):
+# 	return lambda x: x % n > 0
+# # 3,定义一个生成器，不断返回下一个素数
+# def primes():
+# 	yield 2
+# 	it = _odd_iter()
+# 	while True:
+# 		n = next(it)
+# 		yield n
+# 		it = filter(_not_divisible(n), it)
+
+# for n in primes():
+#     if n < 100:
+#         print(n)
+#     else:
+#         break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
