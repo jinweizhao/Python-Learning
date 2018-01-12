@@ -488,7 +488,7 @@
 #   这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算，其效果就是：
 #   reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
 #eg : 
-from functools import reduce
+# from functools import reduce
 # def add(x, y):
 # 	return x + y
 # reduce(add, [1, 3, 5, 9])  # 25
@@ -589,39 +589,117 @@ from functools import reduce
 
 
 # sorted 排序
+# sorted([36, 5, -12, 9, -21]) # [-21, -12, 5, 9, 36]
+#sorted()函数也是一个高阶函数，它还可以接收一个key函数来实现自定义的排序
+# sorted([36, 5, -12, 9, -21], key=abs) # [5, 9, -12, -21, 36]
+
+#默认情况下，对字符串排序，是按照ASCII的大小比较的
+# sorted(['bob', 'about', 'Zoo', 'Credit']) # sorted(['bob', 'about', 'Zoo', 'Credit'])
+#实现忽略大小写的排序
+# sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower)
+
+#要进行反向排序，不必改动key函数，可以传入第三个参数reverse=True
+# sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+#  ['Zoo', 'Credit', 'bob', 'about']
+
+# 返回函数
+#   可变参数的求和 如果不需要立刻求和
+# def lazy_sum(*args):
+# 	def sum():
+# 		ax = 0
+# 		for n in args:
+# 			ax = n + ax
+# 		return ax
+	# return sum
+# f = lazy_sum(1,3,4,6)
+# print(f())
+
+# 当我们调用lazy_sum()时，每次调用都会返回一个新的函数，即使传入相同的参数
+# f1 != f2
+# f1 = lazy_sum(1, 3, 5, 7, 9)
+# f2 = lazy_sum(1, 3, 5, 7, 9)
 
 
+#  闭包
+# def count():
+#     fs = []
+#     for i in range(1, 4):
+#         def f():
+#              return i*i
+#         fs.append(f)
+#     return fs
+# f1, f2, f3 = count()
+# print(f1())
+# print(f2())
+# print(f3())
+# 全部都是9！原因就在于返回的函数引用了变量i，但它并非立刻执行。
+#等到3个函数都返回时，它们所引用的变量i已经变成了3，因此最终结果为9
+#返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
 
 
+# 如果一定要引用循环变量怎么办？方法是再创建一个函数，用该函数的参数绑定循环变量
+#     当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变：
+# def count():
+# 	def f(j):
+# 		def g():
+# 			return j * j
+# 		return g
+# 	fs = []
+# 	for i in range(1, 4):
+# 		fs.append(f(i))
+# 	return fs
+# f1, f2, f3 = count()
+# print(f1())
+# print(f2())
+# print(f3())
 
 
+# def count():
+#     fs = []
+#     for i in range(1,4):
+#         fs.append(lambda i : (lambda i: i * i))
+#     return fs
+# a,b,c = count()
+# print(a(3)
 
 
+# 利用闭包返回一个计数器函数，每次调用它返回递增整数
+# 生成器方法：
+# def createCounter():
+#     def f():
+#         n = 0
+#         while True:
+#             n += 1
+#             yield n
+#     sum = f()
+#     def counter():
+#         return next(sum)
+#     return counter
+
+# # list方法：
+# def createCounter():
+#     fs = [0]
+#     def counter():
+#         fs[0] = fs[0] + 1
+#         return fs[0]
+#     return counter
+
+# # 全局变量方法（自己写的是这个，但是忽略了局部变量和全局变量，一直没有调出来）：
+# def createCounter():
+#     i = 0
+#     def counter():
+#         nonlocal i #加上这句之后就可以了
+#         i += 1
+#         return i
+#     return counter
 
 
+# 匿名函数 lambda x: x * x  ==   def f(x): return x * x
 
+# f(x)=x2 [1, 4, 9, 16, 25, 36, 49, 64, 81] 
+list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# 装饰器
 
 
 
