@@ -697,19 +697,50 @@
 # 匿名函数 lambda x: x * x  ==   def f(x): return x * x
 
 # f(x)=x2 [1, 4, 9, 16, 25, 36, 49, 64, 81] 
-list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+# list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
-# 装饰器
+# 装饰器   假设我们要增强now()函数的功能，比如，在函数调用前后自动打印日志，
+#       但又不希望修改now()函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。
+# def now():
+# 	print('2015-3-25')
+# 函数对象有一个__name__属性，可以拿到函数的名字：
+# print(now.__name__)
+# print(f.__name__)
 
+# decorator就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的decorator
+def log(func):
+	def wrapper(*args, **kw):
+		print('call %s():' % func.__name__)
+		return func(*args, **kw)
+	return wrapper
 
+# 观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。
+# 	 我们要借助Python的@语法，把decorator置于函数的定义处：
+# @log
+def now():
+	print('2015-3-3')
+# 调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志
+# now()
+# 把@log放到now()函数的定义处，相当于执行了语句
+abc = log(now)
+abc()
+# 如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，
+#     写出来会更复杂。比如，要自定义log的文本
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+@log('execute')
+def now():
+    print('2015-3-25')
 
-
-
-
-
-
-
-
+# 和两层嵌套的decorator相比，3层嵌套的效果是这样的
+now = log('execute')(now)
+# 我们来剖析上面的语句，首先执行log('execute')，返回的是decorator函数，
+# 再调用返回的函数，参数是now函数，返回值最终是wrapper函数
 
 
 
