@@ -1,3 +1,10 @@
+#!/usr/bin/env python3  #可以让这个learning.py文件直接在Unix/Linux/Mac上运行
+# -*- coding: utf-8 -*-    #表示.py文件本身使用标准UTF-8编码
+
+'a learning module'   #一个字符串，表示模块的文档注释，任何模块代码的第一个字符串都被视为模块的文档注释
+__author__ = 'jinweizhao'  #使用__author__变量把作者写进去，这样当你公开源代码后别人就可以瞻仰你的大名
+
+
 	# 1.字符串和编码
 # name = input('enter your name:')
 # s1 = input('输入上一年成绩:')
@@ -840,12 +847,34 @@
 
 
 
+#              模块
+# 一个.py文件就称之为一个模块（Module）。
+# 如果不同的人编写的模块名相同怎么办？为了避免模块名冲突，
+#      Python又引入了按目录来组织模块的方法，称为包（Package）。
+	# mycompany
+	# ├─ __init__.py
+	# ├─ abc.py
+	# └─ xyz.py
+# 引入了包以后，只要顶层的包名不与别人冲突，那所有模块都不会与别人冲突。
+# 现在，abc.py模块的名字就变成了mycompany.abc，类似的，xyz.py的模块名变成了mycompany.xyz。
 
+# 请注意，每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，
+# Python就把这个目录当成普通目录，而不是一个包。__init__.py可以是空文件，
+# 也可以有Python代码，因为__init__.py本身就是一个模块，而它的模块名就是mycompany
 
+# 创建自己的模块时，要注意：
+# 模块名要遵循Python变量命名规范，不要使用中文、特殊字符；
+# 模块名不要和系统模块名冲突，最好先查看系统是否已存在该模块，检
+#     查方法是在Python交互环境执行import abc，若成功则说明系统存在此模块。
 
+# 使用模块  import hello.py
+# 作用域  import hello.py
 
-
-
+# 安装第三方模块：Python中，安装第三方模块，是通过包管理工具pip完成的
+# 第三方库都会在Python官方的pypi.python.org网站注册
+# pip install Pillow
+# 使用Anaconda，这是一个基于Python的数据处理和科学计算平台，它已经内置了许多非常有用的第三方库，
+#     我们装上Anaconda，就相当于把数十个第三方模块自动安装好了，非常简单易用。
 
 
 
