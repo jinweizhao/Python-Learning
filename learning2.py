@@ -101,6 +101,110 @@
 
 
 #  继承和多态
+class Animal(object):
+    def run(self):
+        print('Animal is running...')
+    
+class Dog(Animal):
+
+    def run(self):
+        print('Dog is running...')
+
+class Cat(Animal):
+
+    def run(self):
+        print('Cat is running...')
+
+a = list() # a是list类型
+b = Animal() # b是Animal类型
+c = Dog() # c是Dog类型
+
+#c不仅仅是Dog，c还是Animal
+# print(isinstance(c, Animal)) # True
+# print(isinstance(c, Dog)) # True
+
+def run_twice(ani):
+    	ani.run()
+    	ani.run()
+
+run_twice(b)
+run_twice(c)
+
+class Tortoise(Animal):
+    def run(self):
+        print('Tortoise is running slowly...')
+
+run_twice(Tortoise())
+# 这就是著名的“开闭”原则：
+# 	对扩展开放：允许新增Animal子类；
+# 	对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。
+
+class Timer(object):
+    def run(self):
+        print('Start...')
+
+run_twice(Timer())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
