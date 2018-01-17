@@ -323,6 +323,160 @@ h = Husky()
 
 
 #       面向对象高级编程
+# class Student(object):
+#     pass
+
+# s = Student()
+# s.name = 'Michael' # 动态给实例绑定一个属性
+# print(s.name)  # Michael
+
+# 还可以尝试给实例绑定一个方法：
+# def set_age(self, age):
+# 	self.age = age
+
+# from types import MethodType
+# s.set_age = MethodType(set_age, s)  #给实例绑定一个方法
+# s.set_age(28)
+# print(s.age)
+
+# 为了给所有实例都绑定方法，可以给class绑定方法：
+# def set_score(self, score):
+# 	self.score = score
+# Student.set_score = set_score   # 给class绑定方法后，所有实例均可调用
+
+
+# 使用__slots__
+# Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+# class Student(object):
+# 	__slots__ = ('name', 'age')  # 用tuple定义允许绑定的属性名称
+		
+# 使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的
+
+
+# 使用 @property
+
+# 为了限制score的范围：
+# class Student(object):
+
+#     def get_score(self):
+#          return self._score
+
+#     def set_score(self, value):
+#         if not isinstance(value, int):
+#             raise ValueError('score must be an integer!')
+#         if value < 0 or value > 100:
+#             raise ValueError('score must between 0 ~ 100!')
+#         self._score = value
+
+# 上面的方法又略显复杂，没有直接用属性这么直接简单
+
+# Python内置的@property装饰器就是负责把一个方法变成属性调用的：
+# class Student(object):
+
+#     @property
+#     def score(self):
+#         return self._score
+
+#     @score.setter
+#     def score(self, value):
+#         if not isinstance(value, int):
+#             raise ValueError('score must be an integer!')
+#         if value < 0 or value > 100:
+#             raise ValueError('score must between 0 ~ 100!')
+#         self._score = value
+# s = Student()
+# s.score = 60   # OK，实际转化为s.set_score(60)
+# print(s.score  # OK，实际转化为s.get_score()
+
+# 还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：
+
+# class Screen(object):
+
+# 	@property
+# 	def width(self):
+# 		return self._width    #加单下划线意思：1，私有化属性或方法。2，防止递归调用
+
+# 	@width.setter
+# 	def width(self, value):
+# 		if  not isinstance(value, int):
+# 			raise ValueError('width must be an integer')
+# 		self._width = value
+
+
+# 	@property
+# 	def height(self):
+# 		return self._height
+
+# 	@height.setter
+# 	def height(self, value):
+# 		if not isinstance(value, int):
+# 			raise ValueError('height must be an interger')
+# 		self._height = value
+
+# 	@property
+# 	def resolution(self):
+# 		return self._width * self._height
+# # 测试:
+# s = Screen()
+# s.width = 1024
+# s.height = 768
+# print('resolution =', s.resolution)
+# if s.resolution == 786432:
+#     print('测试通过!')
+# else:
+#     print('测试失败!')
+
+
+#  多重继承
+# 我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，
+# 		你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，
+# 		让某个动物同时拥有好几个MixIn：
+# class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+#     pass
+# MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，
+# 		我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。
+# 多重继承三原则：
+# 1.子类永远在父类前面
+# 2.如果有多个父类，会根据它们在列表中的顺序被检查
+# 3.如果对下一个类存在两个合法的选择，选择第一个父类
+
+
+# 定制类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
